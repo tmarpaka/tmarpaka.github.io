@@ -38,6 +38,12 @@
   <script>
     // Center on Hyderabad
     const map = L.map('map').setView([17.49, 78.38], 16);
+    const benchIcon = L.icon({
+      iconUrl: "https://upload.wikimedia.org/wikipedia/commons/f/f8/Benches_-_minimal_logo_-_svg.svg",
+      iconSize: [32, 32],    // adjust size as you like
+      iconAnchor: [16, 16],  // center of icon
+      popupAnchor: [0, -16]
+    });
 
     // Add OSM tile layer
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
@@ -55,12 +61,27 @@
     //   .addTo(map)
     //   .bindPopup('<b>Hyderabad</b><br>This is a marker.')
     //   .openPopup();
+    // Load and display GeoJSON points
+// fetch('map.geojson')
+//   .then(response => response.json())
+//   .then(data => {
+//     L.geoJSON(data, {
+//       pointToLayer: function (feature, latlng) {
+//         return L.marker(latlng, { icon: benchIcon });
+//       },
+//       onEachFeature: function (feature, layer) {
+//         if (feature.properties && feature.properties.name) {
+//           layer.bindPopup(feature.properties.name);
+//         }
+//       }
+//     }).addTo(map);
+//   });
     fetch('map.geojson')
       .then(response => response.json())
       .then(data => {
         L.geoJSON(data, {
           pointToLayer: function (feature, latlng) {
-            return L.marker(latlng);
+            return L.marker(latlng, { icon: benchIcon });
           },
           onEachFeature: function (feature, layer) {
             if (feature.properties && feature.properties.name) {
