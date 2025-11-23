@@ -81,7 +81,7 @@
       .then(data => {
         L.geoJSON(data, {
           pointToLayer: function (feature, latlng) {
-            return L.marker(latlng, { icon: benchIcon});
+            return L.marker(latlng);
           },
           onEachFeature: function (feature, layer) {
             if (feature.properties && feature.properties.name) {
